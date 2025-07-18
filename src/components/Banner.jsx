@@ -53,7 +53,7 @@ const Banner = () => (
         Оставить заявку
       </a>
       <div className="banner-contacts" style={{marginTop: 18, textAlign: 'center'}}>
-        <span>+7 952 744 58 58</span>
+        <span>+7 932 744 58 58</span>
         <span>shchavsebydet@yandex.ru</span>
       </div>
     </div>
