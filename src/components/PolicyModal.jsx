@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const policyText = (
   <div style={{fontSize: '1rem', color: '#23272f', paddingRight: 36}}>
     <h2 style={{marginTop: 0, fontSize: '1.18rem'}}>Политика обработки персональных данных</h2>
     <p>
-      Настоящая политика определяет порядок обработки и защиты персональных данных, предоставляемых пользователями сайта "Ща всё будет" (далее — Сайт).
+      Настоящая политика определяет порядок обработки и защиты персональных данных, предоставляемых пользователями сайта &quot;Ща всё будет&quot; (далее — Сайт).
     </p>
     <h3 style={{fontSize: '1.08rem'}}>1. Общие положения</h3>
     <p>
@@ -90,6 +91,11 @@ const PolicyModal = ({ open, onClose }) => {
       `}</style>
     </div>
   );
+};
+
+PolicyModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default PolicyModal; 

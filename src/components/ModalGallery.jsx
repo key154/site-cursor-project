@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const AUTO_SLIDE_INTERVAL = 3000;
 
@@ -121,6 +122,12 @@ const ModalGallery = ({ images, title, onClose }) => {
       `}</style>
     </div>
   );
+};
+
+ModalGallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ModalGallery; 
