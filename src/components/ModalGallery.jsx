@@ -8,6 +8,8 @@ const ModalGallery = ({ images, title, onClose }) => {
   const [auto, setAuto] = useState(true);
   const overlayRef = useRef(null);
   const timer = useRef();
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   useEffect(() => {
     if (auto) {
@@ -38,6 +40,25 @@ const ModalGallery = ({ images, title, onClose }) => {
   };
   const handleOverlay = (e) => {
     if (e.target === overlayRef.current) onClose();
+  };
+
+  // Обработка свайпа
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.changedTouches[0].clientX;
+  };
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+  };
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const dx = touchEndX.current - touchStartX.current;
+      if (Math.abs(dx) > 50) {
+        if (dx < 0) next(); // свайп влево — следующее
+        if (dx > 0) prev(); // свайп вправо — предыдущее
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
   };
 
   return (
@@ -74,7 +95,11 @@ const ModalGallery = ({ images, title, onClose }) => {
             <line x1="18" y1="6" x2="6" y2="18" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <div style={{ width: '100%', height: 640, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', background: '#f3f6fd' }}>
+        <div style={{ width: '100%', height: 640, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', background: '#f3f6fd' }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <button
             className="modal-gallery-arrow"
             onClick={prev}
