@@ -16,7 +16,7 @@ const reviews = [
 ];
 
 const Reviews = () => (
-  <section className="reviews">
+  <section className="reviews" id="reviews">
     <h2>Отзывы клиентов</h2>
     <div className="reviews-list">
       {reviews.map((r, i) => (

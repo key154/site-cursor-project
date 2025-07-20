@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/Header';
 import Banner from './components/Banner';
 import About from './components/About';
@@ -13,14 +13,19 @@ import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    document.querySelectorAll('section, .footer').forEach(el => {
+      el.classList.add('visible');
+    });
+  }, []);
   return (
     <div className="main-wrapper">
       <Header />
       <Banner />
       <About />
-      <Advantages />
       <Services />
       <Portfolio />
+      <Advantages />
       <Reviews />
       <RequestForm />
       <Contacts />
