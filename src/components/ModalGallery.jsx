@@ -144,6 +144,21 @@ const ModalGallery = ({ images, title, onClose }) => {
       <style>{`
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+        @media (max-width: 600px) {
+          .modal-gallery-content {
+            max-width: 98vw !important;
+            width: 98vw !important;
+          }
+          .modal-gallery-content > div[style*='height: 640px'] {
+            height: 44vw !important;
+            min-height: 180px !important;
+            max-height: 60vw !important;
+          }
+          .modal-gallery-content img {
+            max-height: 38vw !important;
+            min-height: 120px !important;
+          }
+        }
       `}</style>
     </div>
   );
