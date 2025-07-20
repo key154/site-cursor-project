@@ -909,3 +909,11 @@ section[id], .about, .services, .portfolio, .reviews, .request-form, .contacts {
   transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s, box-shadow 0.22s;
   will-change: transform, opacity;
 }
+
+.modern-carousel .carousel-slide .portfolio-item-title {
+  background: transparent !important;
+}
+.modern-carousel .carousel-slide {
+  background: transparent !important;
+  box-shadow: none !important;
+}

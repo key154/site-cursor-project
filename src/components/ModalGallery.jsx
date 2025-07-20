@@ -10,6 +10,7 @@ const ModalGallery = ({ images, title, onClose }) => {
   const timer = useRef();
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
+  const [swipeOffset, setSwipeOffset] = useState(0);
 
   useEffect(() => {
     if (auto) {
@@ -45,9 +46,11 @@ const ModalGallery = ({ images, title, onClose }) => {
   // Обработка свайпа
   const handleTouchStart = (e) => {
     touchStartX.current = e.changedTouches[0].clientX;
+    setSwipeOffset(0);
   };
   const handleTouchMove = (e) => {
     touchEndX.current = e.changedTouches[0].clientX;
+    setSwipeOffset(touchEndX.current - touchStartX.current);
   };
   const handleTouchEnd = () => {
     if (touchStartX.current !== null && touchEndX.current !== null) {
@@ -57,6 +60,7 @@ const ModalGallery = ({ images, title, onClose }) => {
         if (dx > 0) prev(); // свайп вправо — предыдущее
       }
     }
+    setSwipeOffset(0);
     touchStartX.current = null;
     touchEndX.current = null;
   };
@@ -113,8 +117,9 @@ const ModalGallery = ({ images, title, onClose }) => {
             alt={title}
             style={{
               maxWidth: '90%', maxHeight: 600, borderRadius: 18, boxShadow: '0 2px 16px rgba(60,80,180,0.10)', objectFit: 'cover',
-              transition: 'opacity 0.4s',
+              transition: 'transform 0.25s cubic-bezier(.4,0,.2,1), opacity 0.4s',
               opacity: 1,
+              transform: swipeOffset ? `translateX(${swipeOffset}px)` : 'none',
             }}
           />
           <button
@@ -157,6 +162,9 @@ const ModalGallery = ({ images, title, onClose }) => {
           .modal-gallery-content img {
             max-height: 38vw !important;
             min-height: 120px !important;
+          }
+          .modal-gallery-arrow {
+            display: none !important;
           }
         }
       `}</style>
