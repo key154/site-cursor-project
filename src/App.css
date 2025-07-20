@@ -306,6 +306,8 @@ section, .about, .services, .portfolio, .reviews, .request-form {
 }
 .request-form input,
 .request-form textarea {
+  background: #fff;
+  color: #23272f;
   padding: 12px;
   border-radius: 8px;
   border: 1px solid #e0e7ef;
