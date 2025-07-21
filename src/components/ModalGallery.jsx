@@ -130,19 +130,40 @@ const ModalGallery = ({ images, title, onClose }) => {
         @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
         @media (max-width: 600px) {
           .modal-gallery-content {
-            max-width: 98vw !important;
-            width: 98vw !important;
+            max-width: 99vw !important;
+            width: 99vw !important;
           }
           .modal-gallery-content > div[style*='height: 640px'] {
-            height: 44vw !important;
+            height: 70vw !important;
             min-height: 180px !important;
-            max-height: 60vw !important;
+            max-height: 80vw !important;
           }
           .modal-gallery-content img {
-            max-height: 38vw !important;
+            max-width: 98vw !important;
+            max-height: 70vw !important;
             min-height: 120px !important;
           }
-          /* Удаляю .modal-gallery-arrow { display: none !important; } */
+          .modal-gallery-arrow {
+            left: 8px !important;
+            right: 8px !important;
+            width: 44px !important;
+            height: 44px !important;
+          }
+          .modal-gallery-arrow[aria-label='Вперёд'] {
+            right: 8px !important;
+            left: auto !important;
+          }
+          .modal-gallery-arrow[aria-label='Назад'] {
+            left: 8px !important;
+            right: auto !important;
+          }
+        }
+        .modal-gallery-arrow,
+        .modal-gallery-arrow:focus,
+        .modal-gallery-arrow:active {
+          outline: none !important;
+          box-shadow: none !important;
+          border: none !important;
         }
       `}</style>
     </div>

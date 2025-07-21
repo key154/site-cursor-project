@@ -346,6 +346,23 @@ section, .about, .services, .portfolio, .reviews, .request-form {
   gap: 8px;
   justify-content: flex-start;
 }
+.form-agree input[type="checkbox"] {
+  accent-color: #6366f1;
+  background: #fff !important;
+  border: 1.5px solid #6366f1;
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  box-shadow: none !important;
+}
+@media (max-width: 600px) {
+  .form-agree input[type="checkbox"] {
+    background: #fff !important;
+    border: 1.5px solid #6366f1;
+    box-shadow: none !important;
+  }
+}
 
 /* Стили для ScrollToTop */
 .scroll-to-top {
