@@ -44,25 +44,37 @@ const ModalGallery = ({ images, title, onClose }) => {
   };
 
   // Обработка свайпа
+  const touchStartY = useRef(null);
+  const MIN_SWIPE_DISTANCE = 40;
+  const MAX_VERTICAL_DRIFT = 40;
+
   const handleTouchStart = (e) => {
     touchStartX.current = e.changedTouches[0].clientX;
+    touchStartY.current = e.changedTouches[0].clientY;
     setSwipeOffset(0);
   };
   const handleTouchMove = (e) => {
     touchEndX.current = e.changedTouches[0].clientX;
-    setSwipeOffset(touchEndX.current - touchStartX.current);
+    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY.current);
+    if (dy < MAX_VERTICAL_DRIFT) {
+      setSwipeOffset(touchEndX.current - touchStartX.current);
+    } else {
+      setSwipeOffset(0); // если ушли по вертикали — не свайп
+    }
   };
   const handleTouchEnd = () => {
     if (touchStartX.current !== null && touchEndX.current !== null) {
       const dx = touchEndX.current - touchStartX.current;
-      if (Math.abs(dx) > 50) {
-        if (dx < 0) next(); // свайп влево — следующее
-        if (dx > 0) prev(); // свайп вправо — предыдущее
+      const dy = Math.abs(touchStartY.current - (touchEndX.current ? touchEndX.current : 0));
+      if (Math.abs(dx) > MIN_SWIPE_DISTANCE && Math.abs(dy) < MAX_VERTICAL_DRIFT) {
+        if (dx < 0) next();
+        if (dx > 0) prev();
       }
     }
     setSwipeOffset(0);
     touchStartX.current = null;
     touchEndX.current = null;
+    touchStartY.current = null;
   };
 
   return (
@@ -121,6 +133,9 @@ const ModalGallery = ({ images, title, onClose }) => {
               opacity: 1,
               transform: swipeOffset ? `translateX(${swipeOffset}px)` : 'none',
             }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           />
           <button
             className="modal-gallery-arrow"
