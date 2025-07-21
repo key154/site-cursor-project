@@ -23,6 +23,9 @@ const COLORS = [
   { value: 'custom', label: 'Другой (указать)' },
 ];
 
+const TELEGRAM_BOT_TOKEN = '7956849192:AAF-q5VLu2lB4YgtlgpOLDqkSHZqogWtPpU';
+const TELEGRAM_CHAT_ID = '-4839732228';
+
 const CalculatorModal = ({ open, onClose }) => {
   const [step, setStep] = useState(0);
   const [type, setType] = useState('');
@@ -106,14 +109,36 @@ const CalculatorModal = ({ open, onClose }) => {
     return 0;
   };
 
-  // Форма отправки (заглушка)
-  const handleSend = (e) => {
+  // Форма отправки
+  const handleSend = async (e) => {
     e.preventDefault();
     setSending(true);
-    setTimeout(() => {
-      setSent(true);
-      setSending(false);
-    }, 1200);
+    const form = e.target;
+    const name = form[0].value;
+    const phone = form[1].value;
+    const email = form[2].value;
+    // Собираем параметры калькулятора
+    const params = summary().join('\n');
+    const text = `Заявка из калькулятора сайта "Ща всё будет":\n${params}\nИтоговая цена: ${calcPrice().toLocaleString()} ₽\nИмя: ${name}\nТелефон: ${phone}\nEmail: ${email}`;
+    try {
+      const resp = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text,
+          parse_mode: 'Markdown',
+        }),
+      });
+      if (resp.ok) {
+        setSent(true);
+      } else {
+        alert('Ошибка отправки. Попробуйте позже.');
+      }
+    } catch {
+      alert('Ошибка отправки. Попробуйте позже.');
+    }
+    setSending(false);
   };
 
   // В обработчике выбора типа:
