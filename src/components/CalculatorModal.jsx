@@ -109,6 +109,19 @@ const CalculatorModal = ({ open, onClose }) => {
     return 0;
   };
 
+  // Валидация телефона: мобильные РФ и короткие городские
+  function validatePhone(phone) {
+    const digits = phone.replace(/\D/g, '');
+    // Мобильные РФ: 10-11 цифр, начинается с 7, 8 или +7
+    const isMobile = (
+      (digits.length === 11 && (/^7|8/.test(digits) || digits.startsWith('9')))
+      || (digits.length === 10 && digits.startsWith('9'))
+    );
+    // Короткий городской: 7 цифр
+    const isShort = digits.length === 7;
+    return isMobile || isShort;
+  }
+
   // Форма отправки
   const handleSend = async (e) => {
     e.preventDefault();
@@ -117,6 +130,11 @@ const CalculatorModal = ({ open, onClose }) => {
     const name = form[0].value;
     const phone = form[1].value;
     const email = form[2].value;
+    if (!validatePhone(phone)) {
+      alert('Введите корректный номер телефона: только через 7, +7, 8 или короткий городской из 7 цифр');
+      setSending(false);
+      return;
+    }
     // Собираем параметры калькулятора
     const params = summary().join('\n');
     const text = `Заявка из калькулятора сайта "Ща всё будет":\n${params}\nИтоговая цена: ${calcPrice().toLocaleString()} ₽\nИмя: ${name}\nТелефон: ${phone}\nEmail: ${email}`;
