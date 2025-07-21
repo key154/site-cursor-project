@@ -11,6 +11,7 @@ const ModalGallery = ({ images, title, onClose }) => {
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
   const [swipeOffset, setSwipeOffset] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
 
   useEffect(() => {
     if (auto) {
@@ -52,6 +53,7 @@ const ModalGallery = ({ images, title, onClose }) => {
     touchStartX.current = e.changedTouches[0].clientX;
     touchStartY.current = e.changedTouches[0].clientY;
     setSwipeOffset(0);
+    setIsSwiping(true);
   };
   const handleTouchMove = (e) => {
     touchEndX.current = e.changedTouches[0].clientX;
@@ -63,6 +65,7 @@ const ModalGallery = ({ images, title, onClose }) => {
     }
   };
   const handleTouchEnd = () => {
+    setIsSwiping(false);
     if (touchStartX.current !== null && touchEndX.current !== null) {
       const dx = touchEndX.current - touchStartX.current;
       const dy = Math.abs(touchStartY.current - (touchEndX.current ? touchEndX.current : 0));
@@ -129,9 +132,9 @@ const ModalGallery = ({ images, title, onClose }) => {
             alt={title}
             style={{
               maxWidth: '90%', maxHeight: 600, borderRadius: 18, boxShadow: '0 2px 16px rgba(60,80,180,0.10)', objectFit: 'cover',
-              transition: 'transform 0.25s cubic-bezier(.4,0,.2,1), opacity 0.4s',
+              transition: isSwiping ? 'none' : 'transform 0.25s cubic-bezier(.4,0,.2,1), opacity 0.4s',
               opacity: 1,
-              transform: swipeOffset ? `translateX(${swipeOffset}px)` : 'none',
+              transform: Math.abs(swipeOffset) > 10 ? `translateX(${swipeOffset}px)` : 'none',
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
