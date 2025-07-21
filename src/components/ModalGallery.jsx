@@ -46,6 +46,7 @@ const ModalGallery = ({ images, title, onClose }) => {
 
   // Обработка свайпа
   const touchStartY = useRef(null);
+  const touchEndY = useRef(null);
   const MIN_SWIPE_DISTANCE = 40;
   const MAX_VERTICAL_DRIFT = 40;
 
@@ -57,6 +58,7 @@ const ModalGallery = ({ images, title, onClose }) => {
   };
   const handleTouchMove = (e) => {
     touchEndX.current = e.changedTouches[0].clientX;
+    touchEndY.current = e.changedTouches[0].clientY;
     const dy = Math.abs(e.changedTouches[0].clientY - touchStartY.current);
     if (dy < MAX_VERTICAL_DRIFT) {
       setSwipeOffset(touchEndX.current - touchStartX.current);
@@ -65,19 +67,30 @@ const ModalGallery = ({ images, title, onClose }) => {
     }
   };
   const handleTouchEnd = () => {
-    setIsSwiping(false);
     if (touchStartX.current !== null && touchEndX.current !== null) {
       const dx = touchEndX.current - touchStartX.current;
-      const dy = Math.abs(touchStartY.current - (touchEndX.current ? touchEndX.current : 0));
+      const dy = Math.abs(touchEndY.current - touchStartY.current);
       if (Math.abs(dx) > MIN_SWIPE_DISTANCE && Math.abs(dy) < MAX_VERTICAL_DRIFT) {
-        if (dx < 0) next();
-        if (dx > 0) prev();
+        if (dx < 0) {
+          next();
+        } else if (dx > 0) {
+          prev();
+        }
+        setSwipeOffset(0);
+        setIsSwiping(false);
+        touchStartX.current = null;
+        touchEndX.current = null;
+        touchStartY.current = null;
+        touchEndY.current = null;
+        return;
       }
     }
     setSwipeOffset(0);
+    setIsSwiping(false);
     touchStartX.current = null;
     touchEndX.current = null;
     touchStartY.current = null;
+    touchEndY.current = null;
   };
 
   return (
