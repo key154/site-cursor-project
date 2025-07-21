@@ -9,7 +9,7 @@ const Banner = () => (
       overflow: 'hidden',
       background: 'linear-gradient(90deg, #22c55e 0%, #4b2996 100%)',
       paddingTop: '32px',
-      marginTop: '72px', // добавлено для отступа от шапки
+      marginTop: '64px',
     }}
   >
     <div

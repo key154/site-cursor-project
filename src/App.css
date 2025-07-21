@@ -934,3 +934,18 @@ section[id], .about, .services, .portfolio, .reviews, .request-form, .contacts {
   background: transparent !important;
   box-shadow: none !important;
 }
+
+.header-nav button[aria-label="Калькулятор"],
+.burger-menu button[aria-label="Калькулятор"],
+.modal-content button[style*='absolute'][style*='right:16px'] {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+.header-nav button[aria-label="Калькулятор"]:focus,
+.burger-menu button[aria-label="Калькулятор"]:focus,
+.modal-content button[style*='absolute'][style*='right:16px']:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}

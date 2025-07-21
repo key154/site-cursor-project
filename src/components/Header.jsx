@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo_budet.png';
+// import CalculatorModal from './CalculatorModal';
 
 const nav = [
   { label: 'О компании', href: '#about' },
@@ -12,6 +13,7 @@ const nav = [
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  // const [calcOpen, setCalcOpen] = useState(false);
   const handleNav = (btn, e) => {
     const el = document.querySelector(btn.href);
     if (el) {
@@ -38,6 +40,7 @@ const Header = () => {
               {btn.label}
             </a>
           ))}
+          {/* Калькулятор удалён */}
         </nav>
         <button className="burger-btn" aria-label="Меню" onClick={() => setOpen(o => !o)}>
           <span className={open ? 'burger-line open' : 'burger-line'} />
@@ -57,8 +60,10 @@ const Header = () => {
                 {btn.label}
               </a>
             ))}
+            {/* Калькулятор удалён */}
           </div>
         )}
+        {/* {calcOpen && <CalculatorModal open={calcOpen} onClose={()=>setCalcOpen(false)} />} */}
       </div>
     </header>
   );
