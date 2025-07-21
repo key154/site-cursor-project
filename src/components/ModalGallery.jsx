@@ -8,10 +8,11 @@ const ModalGallery = ({ images, title, onClose }) => {
   const [auto, setAuto] = useState(true);
   const overlayRef = useRef(null);
   const timer = useRef();
-  const touchStartX = useRef(null);
-  const touchEndX = useRef(null);
-  const [swipeOffset, setSwipeOffset] = useState(0);
-  const [isSwiping, setIsSwiping] = useState(false);
+  // Удаляю все useRef и useState, связанные со свайпом
+  // Удаляю handleTouchStart, handleTouchMove, handleTouchEnd
+  // Удаляю пропсы onTouchStart, onTouchMove, onTouchEnd у <img>
+  // Удаляю isSwiping, swipeOffset
+  // В стилях убираю .modal-gallery-arrow { display: none !important; } для мобильных
 
   useEffect(() => {
     if (auto) {
@@ -42,55 +43,6 @@ const ModalGallery = ({ images, title, onClose }) => {
   };
   const handleOverlay = (e) => {
     if (e.target === overlayRef.current) onClose();
-  };
-
-  // Обработка свайпа
-  const touchStartY = useRef(null);
-  const touchEndY = useRef(null);
-  const MIN_SWIPE_DISTANCE = 40;
-  const MAX_VERTICAL_DRIFT = 40;
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.changedTouches[0].clientX;
-    touchStartY.current = e.changedTouches[0].clientY;
-    setSwipeOffset(0);
-    setIsSwiping(true);
-  };
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.changedTouches[0].clientX;
-    touchEndY.current = e.changedTouches[0].clientY;
-    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY.current);
-    if (dy < MAX_VERTICAL_DRIFT) {
-      setSwipeOffset(touchEndX.current - touchStartX.current);
-    } else {
-      setSwipeOffset(0); // если ушли по вертикали — не свайп
-    }
-  };
-  const handleTouchEnd = () => {
-    if (touchStartX.current !== null && touchEndX.current !== null) {
-      const dx = touchEndX.current - touchStartX.current;
-      const dy = Math.abs(touchEndY.current - touchStartY.current);
-      if (Math.abs(dx) > MIN_SWIPE_DISTANCE && Math.abs(dy) < MAX_VERTICAL_DRIFT) {
-        if (dx < 0) {
-          next();
-        } else if (dx > 0) {
-          prev();
-        }
-        setSwipeOffset(0);
-        setIsSwiping(false);
-        touchStartX.current = null;
-        touchEndX.current = null;
-        touchStartY.current = null;
-        touchEndY.current = null;
-        return;
-      }
-    }
-    setSwipeOffset(0);
-    setIsSwiping(false);
-    touchStartX.current = null;
-    touchEndX.current = null;
-    touchStartY.current = null;
-    touchEndY.current = null;
   };
 
   return (
@@ -128,9 +80,7 @@ const ModalGallery = ({ images, title, onClose }) => {
           </svg>
         </button>
         <div style={{ width: '100%', height: 640, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', background: '#f3f6fd' }}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          // Удаляю onTouchStart, onTouchMove, onTouchEnd у <div>
         >
           <button
             className="modal-gallery-arrow"
@@ -145,13 +95,11 @@ const ModalGallery = ({ images, title, onClose }) => {
             alt={title}
             style={{
               maxWidth: '90%', maxHeight: 600, borderRadius: 18, boxShadow: '0 2px 16px rgba(60,80,180,0.10)', objectFit: 'cover',
-              transition: isSwiping ? 'none' : 'transform 0.25s cubic-bezier(.4,0,.2,1), opacity 0.4s',
+              transition: 'transform 0.25s cubic-bezier(.4,0,.2,1), opacity 0.4s',
               opacity: 1,
-              transform: Math.abs(swipeOffset) > 10 ? `translateX(${swipeOffset}px)` : 'none',
+              transform: 'none', // Удаляю transform: Math.abs(swipeOffset) > 10 ? `translateX(${swipeOffset}px)` : 'none',
             }}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            // Удаляю onTouchStart, onTouchMove, onTouchEnd у <img>
           />
           <button
             className="modal-gallery-arrow"
@@ -194,9 +142,7 @@ const ModalGallery = ({ images, title, onClose }) => {
             max-height: 38vw !important;
             min-height: 120px !important;
           }
-          .modal-gallery-arrow {
-            display: none !important;
-          }
+          /* Удаляю .modal-gallery-arrow { display: none !important; } */
         }
       `}</style>
     </div>
