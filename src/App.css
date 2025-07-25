@@ -358,18 +358,20 @@ section, .about, .services, .portfolio, .reviews, .request-form {
 }
 @media (max-width: 600px) {
   .form-agree input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    width: 18px !important;
+    height: 18px !important;
     background: #fff !important;
-    border: 1.5px solid #6366f1;
-    border-radius: 4px;
+    color: #fff !important;
+    border: 1.5px solid #6366f1 !important;
+    border-radius: 4px !important;
     box-shadow: none !important;
-    outline: none;
-    position: relative;
-    cursor: pointer;
-    vertical-align: middle;
+    outline: none !important;
+    position: relative !important;
+    cursor: pointer !important;
+    vertical-align: middle !important;
+    z-index: 1;
   }
   .form-agree input[type="checkbox"]:checked::after {
     content: '';
@@ -382,6 +384,7 @@ section, .about, .services, .portfolio, .reviews, .request-form {
     border: solid #6366f1;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
+    z-index: 2;
   }
 }
 
