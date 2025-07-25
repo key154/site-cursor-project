@@ -983,17 +983,23 @@ section[id], .about, .services, .portfolio, .reviews, .request-form, .contacts {
   .footer p {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding-left: 8px;
-    padding-right: 8px;
-    font-size: 1.05rem;
-    box-sizing: border-box;
     flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: 100vw;
+    box-sizing: border-box;
+    gap: 8px;
+    padding: 0 8px;
+    font-size: clamp(0.7rem, 3vw, 1rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .footer img {
-    height: 28px;
+    height: 22px;
     width: auto;
-    margin-right: 8px;
+    max-width: 12vw;
+    min-width: 24px;
+    margin-right: 6px;
+    flex-shrink: 0;
   }
 }
