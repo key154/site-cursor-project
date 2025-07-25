@@ -979,19 +979,21 @@ section[id], .about, .services, .portfolio, .reviews, .request-form, .contacts {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .footer p {
     display: flex;
-    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    font-size: 0.98rem;
-    white-space: nowrap;
+    gap: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 1.05rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   .footer img {
-    height: 22px;
+    height: 28px;
     width: auto;
-    margin-right: 4px;
+    margin-right: 8px;
   }
 }
