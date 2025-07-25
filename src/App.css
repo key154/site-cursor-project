@@ -984,13 +984,11 @@ section[id], .about, .services, .portfolio, .reviews, .request-form, .contacts {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
-    padding-left: 12px;
-    padding-right: 12px;
+    gap: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
     font-size: 1.05rem;
-    width: 100%;
     box-sizing: border-box;
-    white-space: nowrap;
     flex-wrap: nowrap;
   }
   .footer img {
