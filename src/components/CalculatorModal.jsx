@@ -94,7 +94,7 @@ const CalculatorModal = ({ open, onClose }) => {
         const w = Number(substrate.width) || 0;
         const sh = Number(substrate.height) || 0;
         const area = (w * sh) / 1_000_000; // м²
-        const substratePrice = area * 4000;
+        const substratePrice = area * 7000;
         total += substratePrice;
       }
       return total;
