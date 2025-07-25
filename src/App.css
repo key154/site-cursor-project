@@ -990,6 +990,8 @@ section[id], .about, .services, .portfolio, .reviews, .request-form, .contacts {
     font-size: 1.05rem;
     width: 100%;
     box-sizing: border-box;
+    white-space: nowrap;
+    flex-wrap: nowrap;
   }
   .footer img {
     height: 28px;
