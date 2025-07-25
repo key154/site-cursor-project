@@ -1072,4 +1072,52 @@ section[id], .about, .services, .portfolio, .reviews, .request-form, .contacts {
     border: 1.5px solid #6366f1 !important;
     box-shadow: none !important;
   }
+  input[type="radio"],
+  input[type="radio"]:checked,
+  input[type="radio"]:active,
+  input[type="radio"]:focus {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: #fff !important;
+    background-color: #fff !important;
+    border: 1.5px solid #6366f1 !important;
+    border-color: #6366f1 !important;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    box-shadow: none !important;
+    filter: none !important;
+    outline: none !important;
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+    flex-shrink: 0;
+    margin: 0 6px 0 0;
+    z-index: 1;
+  }
+  input[type="radio"]::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff !important;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  input[type="radio"]:checked::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background: #6366f1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
 }
