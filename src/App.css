@@ -978,3 +978,20 @@ section[id], .about, .services, .portfolio, .reviews, .request-form, .contacts {
     margin-top: 64px !important;
   }
 }
+
+@media (max-width: 600px) {
+  .footer p {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.98rem;
+    white-space: nowrap;
+  }
+  .footer img {
+    height: 22px;
+    width: auto;
+    margin-right: 4px;
+  }
+}
