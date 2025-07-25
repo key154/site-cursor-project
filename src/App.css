@@ -985,8 +985,8 @@ section[id], .about, .services, .portfolio, .reviews, .request-form, .contacts {
     align-items: center;
     justify-content: center;
     gap: 16px;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 12px;
+    padding-right: 12px;
     font-size: 1.05rem;
     width: 100%;
     box-sizing: border-box;
