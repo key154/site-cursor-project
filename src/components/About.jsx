@@ -18,7 +18,24 @@ const About = () => {
             minWidth:56,
             minHeight:56,
             marginRight:16,
-            flexShrink:0
+            flexShrink:0,
+            outline:'none',
+            transition:'transform 0.2s ease, filter 0.2s ease',
+            borderRadius:'50%'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'scale(1.1)';
+            e.target.style.filter = 'brightness(1.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.filter = 'brightness(1)';
+          }}
+          onMouseDown={(e) => {
+            e.target.style.transform = 'scale(0.95)';
+          }}
+          onMouseUp={(e) => {
+            e.target.style.transform = 'scale(1.1)';
           }}
           onClick={()=>setCalcOpen(true)}
         >
