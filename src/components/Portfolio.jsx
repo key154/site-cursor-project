@@ -1,42 +1,33 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import ModalGallery from './ModalGallery';
 
-const works = [
+const services = [
   {
-    title: 'Световые буквы',
+    title: 'Наружные вывески (уличные)',
+    image: '/images/portfolio1.jpg',
+    description: 'Изготовление уличных вывесок с уникальным дизайном.',
     images: [
-      '/images/portfolio1.jpg', // инженерно-технический центр
-      '/images/portfolio2.jpg', // big start
-      '/images/portfolio3.jpg', // vip авто
-      '/images/portfolio4.jpg', // дуть
+      '/images/portfolio1.jpg',
+      '/images/portfolio2.jpg',
+      '/images/portfolio3.jpg',
+      '/images/portfolio4.jpg',
     ],
   },
   {
-    title: 'Световые короба',
+    title: 'Интерьерные вывески',
+    image: '/images/portfolio8.jpg',
+    description: 'Оформление под стиль вашего заведения. Изготовление под заказ из оргстекла, пластика и нержавейки.',
     images: [
-      '/images/portfolio6.jpg', // шаурма
-      '/images/portfolio5.jpg', // поликлиника
-      '/images/portfolio7.jpg', // хлеб и эклер
+      '/images/portfolio8.jpg',
+      '/images/portfolio9.jpg',
+      '/images/portfolio10.jpg',
+      '/images/portfolio11.jpg',
     ],
   },
   {
-    title: 'Оформление сцен',
-    images: [
-      '/images/portfolio16.jpg', // синяя сцена
-      '/images/portfolio17.jpg', // уральские локомотивы
-    ],
-  },
-  {
-    title: 'Вывеска для офиса',
-    images: [
-      '/images/portfolio8.jpg', // Helix
-      '/images/portfolio9.jpg', // Нет долгов
-      '/images/portfolio10.jpg', // Ключ к речи
-      '/images/portfolio11.jpg', // Teplodina
-    ],
-  },
-  {
-    title: 'Рекламный лайтбокс',
+    title: 'Изготовление объемных букв',
+    image: '/images/portfolio12.jpg',
+    description: 'Изготовление световой вывески из букв, а также несветовые, с подсветкой на заказ.',
     images: [
       '/images/portfolio12.jpg',
       '/images/portfolio13.jpg',
@@ -45,15 +36,19 @@ const works = [
     ],
   },
   {
-    title: 'Монтаж вывесок для ПВЗ',
+    title: 'Световые короба',
+    image: '/images/portfolio6.jpg',
+    description: 'Изготовление световых коробов под заказ любых видов.',
     images: [
-      '/images/portfolio22.jpg',
-      '/images/portfolio23.jpg',
-      '/images/portfolio24.jpg',
+      '/images/portfolio6.jpg',
+      '/images/portfolio5.jpg',
+      '/images/portfolio7.jpg',
     ],
   },
   {
-    title: 'Монтаж Баннеров',
+    title: 'Рекламные стеллы',
+    image: '/images/portfolio18.jpg',
+    description: 'Изготовление рекламных стелл различной формы под заказ.',
     images: [
       '/images/portfolio18.jpg',
       '/images/portfolio19.jpg',
@@ -61,72 +56,36 @@ const works = [
       '/images/portfolio21.jpg',
     ],
   },
+  {
+    title: 'Световые вывески',
+    image: '/images/portfolio22.jpg',
+    description: 'Для привлечения потенциальных клиентов',
+    images: [
+      '/images/portfolio22.jpg',
+      '/images/portfolio23.jpg',
+      '/images/portfolio24.jpg',
+    ],
+  },
 ];
-
-const AUTO_SLIDE_INTERVAL = 3500;
 
 const Portfolio = () => {
   const [modal, setModal] = useState({ open: false, work: null });
-  const [index, setIndex] = useState(0);
-  const [hover, setHover] = useState(false);
-  const autoSlide = useRef();
 
   const handleOpen = (work) => setModal({ open: true, work });
   const handleClose = () => setModal({ open: false, work: null });
 
-  const prev = () => setIndex(i => (i - 1 + works.length) % works.length);
-  const next = () => setIndex(i => (i + 1) % works.length);
-
-  // Для отображения 3 работ: центральная, левая, правая
-  const getSlide = (offset) => works[(index + offset + works.length) % works.length];
-
-  // Автопрокрутка
-  useEffect(() => {
-    if (!hover) {
-      autoSlide.current = setTimeout(() => setIndex(i => (i + 1) % works.length), AUTO_SLIDE_INTERVAL);
-    }
-    return () => clearTimeout(autoSlide.current);
-  }, [index, hover]);
-
   return (
     <section className="portfolio" id="portfolio">
-      <h2>Примеры наших работ</h2>
-      <div
-        className="portfolio-carousel modern-carousel"
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
-        <button className="carousel-arrow" onClick={prev} aria-label="Назад">
-          <svg width="28" height="28" viewBox="0 0 24 24" stroke="#fff" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div className="carousel-track">
-          {/* Левая */}
-          <div className="carousel-slide side-slide left-slide fade-slide" style={{transform: 'scale(0.85) rotateY(18deg)', opacity: 0.55}} onClick={prev}>
-            <img src={getSlide(-1).images[0]} alt={getSlide(-1).title} className="portfolio-carousel-img" />
-            <div className="portfolio-item-title">{getSlide(-1).title}</div>
+      <h2>Наши услуги</h2>
+      <div className="portfolio-gallery">
+        {services.map((service, i) => (
+          <div className="portfolio-item" key={i} onClick={() => handleOpen(service)}>
+            <img src={service.image} alt={service.title} />
+            <div className="portfolio-item-content">
+              <div className="portfolio-item-title">{service.title}</div>
+              <div className="portfolio-item-description">{service.description}</div>
+            </div>
           </div>
-          {/* Центральная */}
-          <div className="carousel-slide center-slide fade-slide" style={{transform: 'scale(1.12) rotateY(0deg)', opacity: 1, boxShadow: '0 4px 24px rgba(60,80,180,0.13)'}} tabIndex={0} role="button" onClick={() => handleOpen(getSlide(0))}>
-            <img src={getSlide(0).images[0]} alt={getSlide(0).title} className="portfolio-carousel-img" />
-            <div className="portfolio-item-title">{getSlide(0).title}</div>
-          </div>
-          {/* Правая */}
-          <div className="carousel-slide side-slide right-slide fade-slide" style={{transform: 'scale(0.85) rotateY(-18deg)', opacity: 0.55}} onClick={next}>
-            <img src={getSlide(1).images[0]} alt={getSlide(1).title} className="portfolio-carousel-img" />
-            <div className="portfolio-item-title">{getSlide(1).title}</div>
-          </div>
-        </div>
-        <button className="carousel-arrow" onClick={next} aria-label="Вперёд">
-          <svg width="28" height="28" viewBox="0 0 24 24" stroke="#fff" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-        </button>
-      </div>
-      <div className="carousel-dots">
-        {works.map((_, i) => (
-          <span
-            key={i}
-            className={i === index ? 'carousel-dot active' : 'carousel-dot'}
-            onClick={() => setIndex(i)}
-          />
         ))}
       </div>
       <div style={{marginTop: 18, fontSize: '1.13rem', color: '#6366f1', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8}}>

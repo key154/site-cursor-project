@@ -43,14 +43,14 @@ const Banner = () => (
         Производство, монтаж и сервис. Гарантия качества и сроков.
       </p>
       <a
-        href="#request"
+        href="#contacts"
         className="banner-btn super-banner-btn"
         style={{
           margin: '18px 0 0 0',
         }}
         onClick={e => {
           e.preventDefault();
-          document.getElementById('request')?.scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' });
         }}
       >
         Оставить заявку

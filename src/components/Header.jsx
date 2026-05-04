@@ -8,7 +8,7 @@ const nav = [
   { label: 'Портфолио', href: '#portfolio' },
   { label: 'Отзывы', href: '#reviews' },
   { label: 'Контакты', href: '#contacts' },
-  { label: 'Оставить заявку', href: '#request', accent: true },
+  { label: 'Оставить заявку', href: '#contacts', accent: true },
 ];
 
 const Header = () => {

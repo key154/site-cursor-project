@@ -6,7 +6,6 @@ import Advantages from './components/Advantages';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import Reviews from './components/Reviews';
-import RequestForm from './components/RequestForm';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -27,7 +26,6 @@ function App() {
       <Portfolio />
       <Advantages />
       <Reviews />
-      <RequestForm />
       <Contacts />
       <Footer />
       <ScrollToTop />
